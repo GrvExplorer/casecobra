@@ -23,6 +23,7 @@
   .menuButton {
     display: block;
     cursor: pointer;
+    font-size: 16px;
   }
 
   .mobileLinks {
@@ -38,4 +39,5 @@
     justify-content: center;
     gap: 10px;
   }
+
 }
