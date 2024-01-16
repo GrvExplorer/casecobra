@@ -1,8 +1,10 @@
-import React from 'react'
-
+import Postcards from '@/components/postcards/Postcards'
+import styles from './blog.module.css'
 function page() {
   return (
-    <div>blog page</div>
+    <div>
+      <Postcards />
+    </div>
   )
 }
 
