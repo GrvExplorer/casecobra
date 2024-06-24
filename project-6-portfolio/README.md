@@ -2,7 +2,6 @@
 
   <p align="left"> <a href="" target="_blank" rel="noreferrer"> <img src="./public/banner.png" alt="banner" /></a> </p>
 
-# My Social medial
 
  <p>
 
@@ -22,6 +21,7 @@
 ### My Progress
 
 ### TODO's
+ - Utilities for tailwindcss [open](./src/app/globals.css) 77
 
 # Acknowledgments
 

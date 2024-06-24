@@ -75,8 +75,6 @@
   }
 }
 
-/* TODO: Utilities for tailwindcss */
-
 @layer {
   .flex-center {
     @apply flex items-center justify-center;

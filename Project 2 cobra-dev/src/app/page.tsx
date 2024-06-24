@@ -1,16 +1,5 @@
-"use client";
-import AdminButton from "@/components/AdminButton";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { Button } from "@/components/ui/button";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useAuth,
-  useUser,
-} from "@clerk/nextjs";
+import Navbar from "@/components/ui/Navbar";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
@@ -19,60 +8,8 @@ export default function Home() {
   // const { userId } = useAuth();
 
   return (
-    // TODO: Responsiveness refactor - 8:56 to 56:42 of video
-    // TODO: Admin a/c
     <div className="font-bold">
       <MaxWidthWrapper className={"pb-8 lg:grid"}>
-        <section className="w-full py-4 shadow-md">
-          <header>
-            <nav className="flex w-full items-center justify-between px-8 pb-8 pt-8">
-              <p className="text-xl font-bold">
-                case<span className="text-green-400">cobra</span>
-              </p>
-
-              <ul
-                className={
-                  "${userId ? 'gap-2' : 'gap-4} flex list-none items-center gap-4"
-                }
-              >
-                {/* <SignedIn>
-                {isAdmin && (
-                  <li>
-                    <Button variant={"ghost"}>Admin</Button>
-                  </li>
-                )}
-                </SignedIn> */}
-                <SignedIn>
-                  <AdminButton />
-                  <li>
-                    <div className="flex items-center gap-4">
-                      <UserButton />
-                      <p className="text-lg lg:text-xl">Dashboard ✨</p>
-                    </div>
-                  </li>
-                  <li>
-                    <Button>Create case ={">"} </Button>
-                  </li>
-                </SignedIn>
-                <li>
-                  <SignedOut>
-                    <SignUpButton>
-                      <Button variant={"ghost"}>Sign Up</Button>
-                    </SignUpButton>
-                  </SignedOut>
-                </li>
-                <li>
-                  <SignedOut>
-                    <SignInButton>
-                      <Button variant={"outline"}>Login</Button>
-                    </SignInButton>
-                  </SignedOut>
-                </li>
-              </ul>
-            </nav>
-          </header>
-        </section>
-
         <section className="mt-32 flex flex-col justify-center gap-10 text-center md:mt-40 md:gap-12 lg:gap-16">
           <div className="">
             <Image
