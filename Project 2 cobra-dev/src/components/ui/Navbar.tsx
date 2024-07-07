@@ -12,7 +12,7 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 
 export default function Navbar() {
   return (
-    <MaxWidthWrapper className={'w-full shadow-md py-2'}>
+    <MaxWidthWrapper className={"sticky top-0 z-20 w-full py-2 shadow-md"}>
       <header>
         <nav className="flex w-full items-center justify-between px-8 pb-8 pt-8">
           <Link href={"/"}>

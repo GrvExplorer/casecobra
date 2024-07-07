@@ -1,5 +1,4 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Navbar from "@/components/ui/Navbar";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
