@@ -58,7 +58,7 @@ export default function FileUpload() {
           {...getRootProps()}
           className="flex h-[360px] w-[500px] cursor-pointer flex-col items-center justify-center overflow-hidden border border-dashed border-black bg-gray-100 px-4 py-6 md:w-[600px] lg:h-[600px] lg:w-[800px] 2xl:h-[800px] 2xl:w-[1000px]"
         >
-          <input {...getInputProps()} />
+          <input {...getInputProps()} disabled={isUploading} />
           {fileUrl || isUploading ? (
             <>
               <Image

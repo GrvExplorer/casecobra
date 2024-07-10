@@ -1,3 +1,4 @@
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Navbar from "@/components/ui/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryProvider } from "@/lib/react query/Provider";
@@ -5,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
+import Link from "next/link";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
@@ -46,16 +48,42 @@ export default function RootLayout({
 
             {children}
 
-            {/* <MaxWidthWrapper className={"border-t border-gray-200 "}>
-            <footer className="flex flex-col items-center justify-end gap-6 py-8 ">
-              <p className="">2024 All right reserved</p>
-              <p className="flex gap-8">
-                <p>Terms</p>
-                <p>Privacy Policy</p>
-                <p>Cookies Policy</p>
-              </p>
-            </footer>
-          </MaxWidthWrapper> */}
+            <MaxWidthWrapper className={"mt-8 border-t border-gray-200"}>
+              <footer className="flex w-full justify-between py-8 ">
+                <p className="flex items-center ">2024 All right reserved</p>
+                <div className="flex flex-col gap-6">
+                  <div className="flex gap-6">
+                    <Link href={"/legal/terms-and-conditions"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Terms And Conditions
+                      </p>
+                    </Link>
+                    <Link href={"/legal/privacy-policy"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Privacy Policy
+                      </p>
+                    </Link>
+                    <Link href={"/legal/cookies-policy"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Cookies Policy
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="flex justify-center gap-6">
+                    <Link href={"/legal/cancellation-and-refund"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Cancellation And Refund
+                      </p>
+                    </Link>
+                    <Link href={"/legal/shipment-and-delivery"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Shipment And Delivery
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              </footer>
+            </MaxWidthWrapper>
           </body>
         </html>
       </QueryProvider>

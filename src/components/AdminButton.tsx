@@ -1,22 +1,21 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 function AdminButton() {
   const { user } = useUser();
-  // const [Admin, setAdmin] = useState(false)
+  const router = useRouter()
 
   if (user) {
     const isAdmin =
       user.emailAddresses[0].emailAddress !== process.env.ADMIN_EMAIL;
-    console.log(
-      user?.emailAddresses[0].emailAddress,
-      isAdmin,
-      process.env.ADMIN_EMAIL,
-    );
-    return <div>Admin</div>;
+    if (isAdmin) return;
+    
+    return <Button onClick={() => router.push('/admin')} variant={"outline"}>Admin</Button>;
   }
 
-  return <div></div>;
+  return;
 }
 
 export default AdminButton;

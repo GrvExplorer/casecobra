@@ -1,14 +1,14 @@
-import type { Config } from "tailwindcss"
-import { withUt } from 'uploadthing/tw'
+import type { Config } from "tailwindcss";
+import { withUt } from "uploadthing/tw";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -69,18 +69,27 @@ const config = {
           to: { height: "0" },
         },
         flashing: {
-          '0%, 100%': { opacity: '0.2' },
-          '20%': { opacity: "1" },
+          "0%, 100%": { opacity: "0.2" },
+          "20%": { opacity: "1" },
+        },
+        shimmer: {
+          from: {
+            "backgroundPosition": "0 0"
+          },
+          to: {
+            "backgroundPosition": "-200% 0"
+          },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        flashing: 'flashing 1.4s infinite linear',
+        flashing: "flashing 1.4s infinite linear",
+        shimmer: "shimmer 2s linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default withUt(config)
+export default withUt(config);

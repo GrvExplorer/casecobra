@@ -19,6 +19,7 @@ import {
   MODELS,
 } from "@/constants/options-validation";
 import { useSaveConfig } from "@/lib/react query/mutations/queryandmutations";
+import { revalidateAtClient } from "@/lib/server actions/actions";
 import { useUploadThing } from "@/lib/upload thing/uploadThing";
 import { cn, formatPrice } from "@/lib/utils";
 import { RadioGroup } from "@headlessui/react";
@@ -85,7 +86,6 @@ export default function CheckOnPhone({
 
       const base64 = canvas.toDataURL();
       const base64Data = base64.split(",")[1];
-      console.log(base64Data);
 
       const blob = base64ToBlob(base64Data, "image/png");
 
@@ -122,10 +122,13 @@ export default function CheckOnPhone({
   if (options.material.value === "polycarbonate")
     totalPrice += PRODUCT_PRICES.material.polycarbonate;
 
-  const { mutateAsync: saveConfig, isPending } = useSaveConfig(handleCropPart);
+  const { mutate: saveConfig, isPending } = useSaveConfig(handleCropPart);
 
   const { startUpload } = useUploadThing("imageUploader", {
-    onClientUploadComplete: () => {},
+    onClientUploadComplete: () => {
+      revalidateAtClient(`/configure/preview?id=${configId}`)
+      router.push(`/configure/preview?id=${configId}`)
+    },
   });
 
   // Getting Cropped Image Part

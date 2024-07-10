@@ -11,6 +11,7 @@ import Link from "next/link";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 
 export default function Navbar() {
+
   return (
     <MaxWidthWrapper className={"sticky top-0 z-20 w-full py-2 shadow-md"}>
       <header>
@@ -37,6 +38,9 @@ export default function Navbar() {
               <AdminButton />
               <li>
                 <div className="flex items-center gap-4">
+                  {/* TODO: On sign out redirect url check configuration present and stay in that page */}
+                  {/* <UserButton afterSignOutUrl="/auth-callback" /> */}
+                  {/* TODO: Data on Deleting account */}
                   <UserButton />
                   <p className="text-lg lg:text-xl">Dashboard ✨</p>
                 </div>

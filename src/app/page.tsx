@@ -1,6 +1,8 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { TiTick } from "react-icons/ti";
 
 export default function Home() {
@@ -24,11 +26,19 @@ export default function Home() {
             </h1>
           </div>
 
-          <h2 className="text-lg font-medium lg:text-xl">
+          <h2 className="text-lg -mt-4 font-medium lg:text-xl">
             Capture your favorite memories with your own,{" "}
             <span className="font-bold">one-of-one</span> phone case. CaseCobra
             allows you to protect your memories not just your phone case.
           </h2>
+
+          <div className="-mt-6">
+            <Link href={"/configure/upload"}>
+              <Button className="animate-shimmer inline-flex h-12 items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000000,45%,#4ade80,55%,#000000)] bg-[length:200%_100%] px-6 font-medium text-slate-300 transition-colors focus:outline-none">
+                Create Now
+              </Button>
+            </Link>
+          </div>
 
           <div className="mt-4 flex justify-center">
             <div className=" flex flex-col gap-6">

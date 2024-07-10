@@ -5,6 +5,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { Configuration } from "@prisma/client";
 import Image from "next/image";
 import CreatePaymentPage from "./CreatePaymentPage";
+import Confetti from "@/components/ui/Confetti";
 
 export default function PreviewDesign({
   configuration,
@@ -24,6 +25,9 @@ export default function PreviewDesign({
   )?.tw;
 
   return (
+    <>
+    {/* TODO: Add confetti */}
+    {/* <Confetti /> */}
     <div className="mb-6 mt-20 grid w-full gap-20 md:grid-cols-3">
       <div className="flex justify-center md:col-span-1">
         <div className="pointer-events-none relative aspect-[896/1831] w-60 bg-opacity-50 ">
@@ -132,5 +136,6 @@ export default function PreviewDesign({
         </div>
       </div>
     </div>
+    </>
   );
 }
