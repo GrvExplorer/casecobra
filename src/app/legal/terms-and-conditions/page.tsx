@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <div className="h-[75vh]">
+    <div className="">
       <h1 className="pt-10 text-4xl">Terms And Conditions</h1>
 
       <p className="mt-10">

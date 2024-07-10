@@ -10,6 +10,7 @@ import Link from "next/link";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
+import Script from "next/script";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,9 @@ export default function RootLayout({
     <ClerkProvider>
       <QueryProvider>
         <html lang="en">
+          <head>
+          <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
+          </head>
           <body className={bricolage.className}>
             <Toaster />
             <NextSSRPlugin
@@ -51,7 +55,7 @@ export default function RootLayout({
             <MaxWidthWrapper className={"mt-8 border-t border-gray-200"}>
               <footer className="flex w-full justify-between py-8 ">
                 <p className="flex items-center ">2024 All right reserved</p>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 items-center">
                   <div className="flex gap-6">
                     <Link href={"/legal/terms-and-conditions"}>
                       <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
@@ -69,7 +73,7 @@ export default function RootLayout({
                       </p>
                     </Link>
                   </div>
-                  <div className="flex justify-center gap-6">
+                  <div className="flex gap-6">
                     <Link href={"/legal/cancellation-and-refund"}>
                       <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
                         Cancellation And Refund
@@ -78,6 +82,11 @@ export default function RootLayout({
                     <Link href={"/legal/shipment-and-delivery"}>
                       <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
                         Shipment And Delivery
+                      </p>
+                    </Link>
+                    <Link href={"/legal/contact-us"}>
+                      <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">
+                        Contact Us
                       </p>
                     </Link>
                   </div>

@@ -117,6 +117,29 @@ export async function paymentSession({ configId }: { configId: string }) {
 
     // get checkout session in razorpay
 
+  //   const options = {
+  //     "key_id": "YOUR_KEY_ID",
+  //     "amount": product.amount,
+  //     "currency": "INR",
+  //     "name": "Casecobra",
+  //     "description": "Test Transaction",
+  //     "image": "https://example.com/your_logo",
+  //     "order_id": product.id,
+  //     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+  //     "redirect": "http//:localhost:3000/thank-you",
+  //     "prefill": {
+  //         "name": "Gaurav Kumar",
+  //         "email": "gaurav.kumar@example.com",
+  //         "contact": "9000090000" 
+  //     },
+  //     "notes": {
+  //         "address": "Razorpay Corporate Office"
+  //     },
+  //     "theme": {
+  //         "color": "#3399cc"
+  //     }
+  // };
+  // const rzp1 = new Razorpay(options);
 
     return { url: "Payment Session URL." };
   } catch (error) {
