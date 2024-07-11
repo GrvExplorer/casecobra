@@ -7,10 +7,10 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import "./globals.css";
-import Script from "next/script";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
       <QueryProvider>
         <html lang="en">
           <head>
-          <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
+            <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
           </head>
           <body className={bricolage.className}>
             <Toaster />
@@ -52,10 +52,23 @@ export default function RootLayout({
 
             {children}
 
-            <MaxWidthWrapper className={"mt-8 border-t border-gray-200"}>
+            <MaxWidthWrapper
+              className={"mt-8 overflow-auto border-t border-gray-200"}
+            >
               <footer className="flex w-full justify-between py-8 ">
-                <p className="flex items-center ">2024 All right reserved</p>
-                <div className="flex flex-col gap-6 items-center">
+                <div className="">
+                  <p className="text-xl font-semibold">REGD. OFFICE ADDRESS</p>
+                  <address>
+                    <ul>
+                      <li>Casecobra Software,</li>
+                      <li>Pandri, Raipur, 492004, CHATTISGARH, INDIA</li>
+                    </ul>
+                  </address>
+                  <p className="flex items-center ">
+                    © 2024 All right reserved
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-6">
                   <div className="flex gap-6">
                     <Link href={"/legal/terms-and-conditions"}>
                       <p className="border-b border-transparent hover:border-b hover:border-dashed hover:border-gray-300">

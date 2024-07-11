@@ -2,8 +2,6 @@
     
   <p align="left"> <a href="" target="_blank" rel="noreferrer"> <img src="" alt="banner" /></a> </p>
 
-# My Social medial
-
 # Technologies used 
  <p style="display: flex; gap: 10px;">
 
