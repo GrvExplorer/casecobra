@@ -11,7 +11,7 @@ export const POST = async (req: Request, res: Response) => {
 
     const crypto = require("crypto");
     const hmac = crypto
-      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
       .update(details.toString());
 
     const generated_signature = hmac.digest("hex");
