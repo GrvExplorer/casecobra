@@ -36,3 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 /project 2 cobra-dev
+/project-5-thread
+/project-7-auth

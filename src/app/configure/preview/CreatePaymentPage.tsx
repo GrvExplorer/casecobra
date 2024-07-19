@@ -10,6 +10,8 @@ export default function CreatePaymentPage({ configId }: { configId: string }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const { mutate: paymentSession, isPending } = usePaymentSession();
+
+
   const { user } = useUser();
 
   const handleCheckout = () => {

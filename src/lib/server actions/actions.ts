@@ -36,7 +36,7 @@ export async function saveConfig({
   if (!updated) {
     return;
   }
-  return {configId: configId}
+  return { configId: configId };
 }
 
 export async function paymentSession({ configId }: { configId: string }) {
@@ -60,36 +60,16 @@ export async function paymentSession({ configId }: { configId: string }) {
     if (material === "polycarbonate")
       totalPrice += PRODUCT_PRICES.material.polycarbonate;
 
-    // // TODO: Create user at db here only | do it at the time of signup
-    // let userAtDB: User | undefined;
-    // const userAtDBExists = await db.user.findFirst({
-    //   where: {
-    //     id: user.id,
-    //   },
-    // });
-
-    // if (userAtDBExists) {
-    //   userAtDB = userAtDBExists;
-    // } else {
-    //   userAtDB = await db.user.create({
-    //     data: {
-    //       id: user.id,
-    //       email: user.emailAddresses[0].emailAddress,
-    //     },
-    //   });
-    // }
-
     let order: Order | undefined;
+
     const existsOrder = await db.order.findFirst({
       where: {
         configurationId: configId,
         userId: user.id,
       },
     });
-
     if (existsOrder) {
       order = existsOrder;
-      console.log("order exists");
     } else {
       order = await db.order.create({
         data: {
@@ -98,52 +78,33 @@ export async function paymentSession({ configId }: { configId: string }) {
           configurationId: configId,
         },
       });
-      console.log("order created");
     }
 
-    const instance = new Razorpay({
-      key_id: "",
-      key_secret: "",
+    const inst = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID || "",
+      key_secret: process.env.RAZORPAY_SECRET || "",
     });
 
-    // Product Create in razorpay
-    const product = instance.orders.create({
-      amount: totalPrice,
+    const createdOrder = await inst.orders.create({
+      amount: order.amount,
       currency: "INR",
-      customer_id: user.id,
-    }, function(err, order) {
-      console.log(order);
+      receipt: order.id,
+      notes: {
+        key1: "value3",
+        key2: "value2",
+      },
     });
+    console.log("🚀 ~ file: actions.ts:97 ~ paymentSession ~ createdOrder:", createdOrder)
 
-    // get checkout session in razorpay
 
-  //   const options = {
-  //     "key_id": "YOUR_KEY_ID",
-  //     "amount": product.amount,
-  //     "currency": "INR",
-  //     "name": "Casecobra",
-  //     "description": "Test Transaction",
-  //     "image": "https://example.com/your_logo",
-  //     "order_id": product.id,
-  //     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-  //     "redirect": "http//:localhost:3000/thank-you",
-  //     "prefill": {
-  //         "name": "Gaurav Kumar",
-  //         "email": "gaurav.kumar@example.com",
-  //         "contact": "9000090000" 
-  //     },
-  //     "notes": {
-  //         "address": "Razorpay Corporate Office"
-  //     },
-  //     "theme": {
-  //         "color": "#3399cc"
-  //     }
-  // };
-  // const rzp1 = new Razorpay(options);
+    if (!createdOrder) {
+      return undefined;
+      throw new Error("Something went wrong while creating the order");
+    }
 
-    return { url: "Payment Session URL." };
+    return { createdOrder};
   } catch (error) {
-    console.error(error);
+    console.log("🚀 ~ file: actions.ts:142 ~ paymentSession ~ error:", error);
   }
 }
 
@@ -173,6 +134,6 @@ export async function getAuthStatus() {
   }
 }
 
-export async function revalidateAtClient(path:string) {
-  revalidatePath(path, 'page')
+export async function revalidateAtClient(path: string) {
+  revalidatePath(path, "page");
 }
