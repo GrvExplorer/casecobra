@@ -12,6 +12,7 @@ import {
 } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Razorpay from "razorpay";
+import { Orders } from "razorpay/dist/types/orders";
 
 export type SaveConfigArgs = {
   color: CaseColor;
@@ -81,28 +82,55 @@ export async function paymentSession({ configId }: { configId: string }) {
     }
 
     const inst = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID || "",
-      key_secret: process.env.RAZORPAY_SECRET || "",
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
     });
+
+    if (existsOrder) {
+      const orderOnRazorpay = await inst.orders.fetch(order.id);
+
+      if (!orderOnRazorpay) {
+        throw new Error("Something went wrong while fetching the order");
+      }
+
+      console.log(
+        "🚀 ~ file: actions.ts:91 ~ paymentSession ~ orderOnRazorpay: order already exists",
+        orderOnRazorpay,
+      );
+
+      return { createdOrder: orderOnRazorpay };
+    }
 
     const createdOrder = await inst.orders.create({
       amount: order.amount,
       currency: "INR",
       receipt: order.id,
       notes: {
-        key1: "value3",
-        key2: "value2",
+        orderId: order.id,
+        userId: user.id,
       },
     });
-    console.log("🚀 ~ file: actions.ts:97 ~ paymentSession ~ createdOrder:", createdOrder)
 
+    // FIXME: IF error accors related to orderId in db and orderId in razorpay
+    order = await db.order.update({
+      where: {
+        id: order.id,
+      },
+      data: {
+        id: createdOrder.id,
+      },
+    });
+
+    console.log(
+      "🚀 ~ file: actions.ts:97 ~ paymentSession ~ createdOrder:",
+      createdOrder,
+    );
 
     if (!createdOrder) {
-      return undefined;
       throw new Error("Something went wrong while creating the order");
     }
 
-    return { createdOrder};
+    return { createdOrder };
   } catch (error) {
     console.log("🚀 ~ file: actions.ts:142 ~ paymentSession ~ error:", error);
   }

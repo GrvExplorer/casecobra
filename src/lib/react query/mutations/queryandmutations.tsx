@@ -54,25 +54,21 @@ export const usePaymentSession = () => {
       if (createdOrder) {
         var options = {
           key: process.env.RAZORPAY_KEY_ID,
-          amount: createdOrder.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          amount: createdOrder.amount,
           currency: createdOrder.currency,
-          name: "Acme Corp",
+          name: "Gaurav Verma",
           description: "Test Transaction",
           image: "https://example.com/your_logo",
           order_id: createdOrder.id,
-          handler: async function (response: any) {
-            const body = {
-              ...response,
-            };
-            console.log(body);
-          },
+          callback_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/payment/success`,
           prefill: {
             name: "Web Dev Matrix",
             email: "webdevmatrix@example.com",
             contact: "9000000000",
           },
           notes: {
-            address: "Razorpay Corporate Office",
+            orderId: createdOrder.notes.orderId,
+            userId: createdOrder.notes.userId,
           },
           theme: {
             color: "#3399cc",
@@ -81,20 +77,23 @@ export const usePaymentSession = () => {
 
         var rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response: any) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
+          console.log(response.error.code);
+          console.log(response.error.description);
+          console.log(response.error.source);
+          console.log(response.error.step);
+          console.log(response.error.reason);
+          console.log(response.error.metadata.order_id);
+          console.log(response.error.metadata.payment_id);
         });
         rzp1.open();
       }
+
     },
-    onError: () => {
+    onError: (error) => {
+      console.log("🚀 ~ file: queryandmutations.tsx:93 ~ usePaymentSession ~ error:", error)
+      
       toast({
-        title: "Something went wrong 51 from queryandmutations",
+        title: "Something went wrong.",
         description: "There was an error on our end. Please try again.",
         variant: "destructive",
       });
