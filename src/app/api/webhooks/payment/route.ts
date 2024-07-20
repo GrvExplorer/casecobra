@@ -8,7 +8,7 @@ export const POST = async (req: Request, res: Response) => {
 
     const valid = validateWebhookSignature(
       JSON.stringify(req.body),
-      req.headers.get("razorpay-signature")!,
+      req.headers.get("x-razorpay-signature")!,
       '12345678',
     );
 
