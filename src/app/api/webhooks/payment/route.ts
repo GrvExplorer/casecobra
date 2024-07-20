@@ -4,10 +4,12 @@ export const POST = async (req: Request, res: Response) => {
   try {
     // FIXME: webhook request have different formate of request body, headers, signature.
 
+    
+
     const valid = validateWebhookSignature(
       JSON.stringify(req.body),
       req.headers.get("razorpay-signature")!,
-      process.env.RAZORPAY_KEY_SECRET!,
+      '12345678',
     );
 
     // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
@@ -43,6 +45,9 @@ export const POST = async (req: Request, res: Response) => {
     //     status: 200,
     //   });
     // }
+
+    console.log(JSON.stringify(req.body));
+    
 
     if (valid) {
       console.log("🚀 ~ file: route.ts:49 ~ POST ~ valid:", valid);
