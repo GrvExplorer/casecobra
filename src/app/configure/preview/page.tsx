@@ -15,7 +15,7 @@ export default async function Page({
 
   const configuration = await db.configuration.findUnique({
     where: {
-      Qid: id,
+      id: id,
     },
   });
 

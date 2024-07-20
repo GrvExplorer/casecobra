@@ -28,23 +28,22 @@ export const ourFileRouter = {
       if (!configId) {
         const configuration = await db.configuration.create({
           data: {
-            id: "",
             imageUrl: file.url,
             width: width || 500,
             height: height || 500,
           },
         });
-        return { configId: configuration.Qid };
+        return { configId: configuration.id };
       } else {
         const updateConfiguration = await db.configuration.update({
           where: {
-            Qid: configId,
+            id: configId,
           },
           data: {
             croppedImageUrl: file.url,
           },
         });
-        return { configId: updateConfiguration.Qid };
+        return { configId: updateConfiguration.id };
       }
     }),
 } satisfies FileRouter;

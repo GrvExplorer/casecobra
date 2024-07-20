@@ -4,7 +4,7 @@ export async function getImageUrlById(id: string) {
   try {
     const res = await db.configuration.findUnique({
       where: {
-        Qid: id,
+        id: id,
       },
     });
     if (!res) {

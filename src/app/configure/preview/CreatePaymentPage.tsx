@@ -11,7 +11,6 @@ export default function CreatePaymentPage({ configId }: { configId: string }) {
 
   const { mutate: paymentSession, isPending } = usePaymentSession();
 
-
   const { user } = useUser();
 
   const handleCheckout = () => {

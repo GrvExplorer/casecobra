@@ -5,7 +5,7 @@ export async function getConfigureById({ configId }: { configId: string }) {
   try {
     const configuration = await db.configuration.findUnique({
       where: {
-        Qid: configId,
+        id: configId,
       },
     });
 

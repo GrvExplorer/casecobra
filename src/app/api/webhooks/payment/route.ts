@@ -1,15 +1,22 @@
+import { db } from "@/db";
+import { Order } from "@prisma/client";
 import { validateWebhookSignature } from "razorpay/dist/utils/razorpay-utils";
 
 export const POST = async (req: Request, res: Response) => {
   try {
     // FIXME: webhook request have different formate of request body, headers, signature.
 
-    
+    const {
+      payload: {
+        order: { entity },
+      },
+    } = await req.json();
+    const jsonBody = JSON.stringify(req.body);
 
     const valid = validateWebhookSignature(
-      JSON.stringify(req.body),
-      req.headers.get("razorpay-signature")!,
-      '12345678',
+      jsonBody,
+      req.headers.get("x-razorpay-signature")!,
+      "12345678",
     );
 
     // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
@@ -47,9 +54,19 @@ export const POST = async (req: Request, res: Response) => {
     // }
 
     console.log(JSON.stringify(req.body));
-    
 
     if (valid) {
+      const order: Order = await db.order.update({
+        where: {
+          id: entity.id,
+        },
+        data: {
+          isPaid: true,
+        },
+      });
+
+      if (!order) return new Response(`Not able to update order in database update it payment is being made ${entity.id}.`, { status: 500 });
+
       console.log("🚀 ~ file: route.ts:49 ~ POST ~ valid:", valid);
       return new Response("OK", {
         status: 200,

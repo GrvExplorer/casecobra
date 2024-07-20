@@ -1,12 +1,12 @@
 import { useToast } from "@/components/ui/use-toast";
 import {
   SaveConfigArgs,
+  getPaymentStatus,
   paymentSession,
   saveConfig,
 } from "@/lib/server actions/actions";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { Orders } from "razorpay/dist/types/orders";
 
 declare global {
   interface Window {
@@ -60,7 +60,7 @@ export const usePaymentSession = () => {
           description: "Test Transaction",
           image: "https://example.com/your_logo",
           order_id: createdOrder.id,
-          callback_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/payment/success`,
+          callback_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/payment/success?orderId=${createdOrder.id}`,
           prefill: {
             name: "Web Dev Matrix",
             email: "webdevmatrix@example.com",
@@ -87,16 +87,30 @@ export const usePaymentSession = () => {
         });
         rzp1.open();
       }
-
     },
     onError: (error) => {
-      console.log("🚀 ~ file: queryandmutations.tsx:93 ~ usePaymentSession ~ error:", error)
-      
+      console.log(
+        "🚀 ~ file: queryandmutations.tsx:93 ~ usePaymentSession ~ error:",
+        error,
+      );
+
       toast({
         title: "Something went wrong.",
         description: "There was an error on our end. Please try again.",
         variant: "destructive",
       });
     },
+  });
+};
+
+export const useGetPaymentStatus = (orderId: string) => {
+  return useQuery({
+    queryKey: ["GET-PAYMENT-STATUS"],
+    queryFn: async () => getPaymentStatus(orderId),
+
+    // keep trying until the query does not return order
+
+    retry: true,
+    retryDelay: 500,
   });
 };

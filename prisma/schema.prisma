@@ -39,9 +39,8 @@ enum CaseColor {
 }
 
 model Configuration {
-  id              String
   width           Int
-  Qid             String        @id @default(cuid())
+  id              String        @id @default(cuid())
   height          Int
   imageUrl        String
   croppedImageUrl String?
@@ -64,7 +63,7 @@ model User {
 model Order {
   id                String           @id @default(cuid())
   configurationId   String
-  configuration     Configuration    @relation(fields: [configurationId], references: [Qid])
+  configuration     Configuration    @relation(fields: [configurationId], references: [id])
   userId            String
   user              User             @relation(fields: [userId], references: [id])
   amount            Float
