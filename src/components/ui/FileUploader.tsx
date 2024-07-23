@@ -23,7 +23,7 @@ export default function FileUpload() {
         setFile([]);
         router.push(`/configure/design?id=${data.serverData.configId}`);
       },
-      onUploadProgress(p) {
+      onUploadProgress(p) {   
         setUploadProgress(p);
       },
     },

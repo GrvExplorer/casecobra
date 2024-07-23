@@ -8,7 +8,11 @@ import PhonePreview from "./phone-preview";
 
 function ThankYou({ orderId }: { orderId: string }) {
   const { isPending, data: status, isError } = useGetPaymentStatus(orderId);
+  console.log("🚀 ~ file: thank-you.tsx:11 ~ ThankYou ~ status:", status)
 
+
+
+  
   if (status === undefined) {
     return (
       <div className="mt-24 flex w-full justify-center">
@@ -86,6 +90,7 @@ function ThankYou({ orderId }: { orderId: string }) {
         </div>
 
           <div>
+            {/* TODO: Get the shipping address from user in checkout session */}
             {/* <div className='grid grid-cols-2 gap-x-6 py-10 text-sm'>
             <div>
               <p className='font-medium text-gray-900'>Shipping address</p>

@@ -31,13 +31,15 @@ function PhonePreview({ croppedImageUrl, color }: PhonePreviewProps) {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  });
+  }, []);
 
   let caseBackgroundColor = "bg-zinc-950";
   if (color === "blue") caseBackgroundColor = "bg-blue-950";
   if (color === "rose") caseBackgroundColor = "bg-rose-950";
 
   return (
+
+    // TODO: understand how to use aspect ratio
     <AspectRatio ref={ref} ratio={3000 / 2001} className="relative">
 
       <div className="absolute z-20 scale-[1.0352]"

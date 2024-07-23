@@ -10,7 +10,7 @@ function AdminButton() {
   if (user) {
     const isAdmin =
       user.emailAddresses[0].emailAddress !== process.env.ADMIN_EMAIL;
-    if (isAdmin) return;
+    if (!isAdmin) return;
     
     return <Button onClick={() => router.push('/admin')} variant={"outline"}>Admin</Button>;
   }

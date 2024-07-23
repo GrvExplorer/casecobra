@@ -8,6 +8,7 @@ import {
   CaseFinish,
   CaseMaterial,
   Order,
+  OrderStatus,
   PhoneModel,
 } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -131,7 +132,7 @@ export async function paymentSession({ configId }: { configId: string }) {
     }
 
     const createdOrder = await inst.orders.create({
-      amount: order.amount,
+      amount: order.amount * 100,
       currency: "INR",
       receipt: order.id,
       notes: {
@@ -190,4 +191,26 @@ export const getPaymentStatus = async (orderId: string) => {
   } else {
     return false;
   }
+};
+
+export const changeOrderStatus = async ({
+  orderId,
+  status,
+}: {
+  orderId: string;
+  status: OrderStatus;
+}) => {
+  const order = await db.order.update({
+    where: {
+      id: orderId,
+    },
+    data: {
+      status,
+    },
+  });
+  if (!order) {
+    throw new Error("Something went wrong while changing the order status");
+  }
+
+  return order.status as OrderStatus;
 };

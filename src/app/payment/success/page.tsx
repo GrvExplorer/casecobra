@@ -5,9 +5,14 @@ export default async function Page({
   searchParams,
 }: {
   searchParams: {
-    orderId: string;
-  };
+    orderId: string
+  }
 }) {
+
+//  const formData = req.formData();
+//  console.log("🚀 ~ file: page.tsx:12 ~ formData:", formData)
+//  console.log(req);
+ 
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
