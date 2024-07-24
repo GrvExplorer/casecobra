@@ -23,14 +23,19 @@ import { db } from "@/db";
 import { formatPrice } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 async function Admin() {
   const current = await currentUser();
 
   const referer = headers().get("referer");
 
-  if (current?.id !== process.env.ADMIN_ID) {
+  // TODO: Check if the user is admin not working properly in production 
+  if (!current) {
+    return notFound()
+  }
+
+  if (current.id !== process.env.ADMIN_ID) {
     if (!referer) {
       return redirect("/");
     }

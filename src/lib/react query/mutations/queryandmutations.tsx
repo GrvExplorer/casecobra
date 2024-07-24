@@ -60,7 +60,23 @@ export const usePaymentSession = () => {
           description: "Test Transaction",
           image: "https://example.com/your_logo",
           order_id: createdOrder.id,
-          callback_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/payment/success?orderId=${createdOrder.id}`,
+          handler: async function (response: any) {
+
+            router.push(
+              `/payment/success?orderId=${response.razorpay_order_id}`,
+            );
+
+            await fetch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/api/webhooks/payment`,
+              {
+                method: "POST",
+                body: JSON.stringify(response),
+                mode: "same-origin",
+              },
+            );
+
+  
+          },
           prefill: {
             name: "Web Dev Matrix",
             email: "webdevmatrix@example.com",

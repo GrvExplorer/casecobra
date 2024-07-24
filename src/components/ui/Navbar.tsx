@@ -34,8 +34,10 @@ export default function Navbar() {
           </li>
         )}
         </SignedIn> */}
+            
             <SignedIn>
-              <AdminButton />
+              {/* TODO: to be fixed (should show admin button for admin only.) */}
+            <AdminButton />
               <li>
                 <div className="flex items-center gap-4">
                   {/* TODO: On sign out redirect url check configuration present and stay in that page */}

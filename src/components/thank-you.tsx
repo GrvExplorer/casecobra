@@ -6,16 +6,13 @@ import { Loader2 } from "lucide-react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import PhonePreview from "./phone-preview";
 
-function ThankYou({ orderId }: { orderId: string }) {
+function ThankYou({ orderId,  }: { orderId: string }) {
   const { isPending, data: status, isError } = useGetPaymentStatus(orderId);
   console.log("🚀 ~ file: thank-you.tsx:11 ~ ThankYou ~ status:", status)
-
-
-
   
   if (status === undefined) {
     return (
-      <div className="mt-24 flex w-full justify-center">
+      <div className="mt-24 h-[62vh] flex w-full justify-center">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-10 w-10 animate-spin text-zinc-500" />
 
@@ -31,7 +28,7 @@ function ThankYou({ orderId }: { orderId: string }) {
 
   if (status === false) {
     return (
-      <div className="mt-24 flex w-full justify-center">
+      <div className="mt-24 flex w-full justify-center h-[62vh] ">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-10 w-10 animate-spin text-zinc-500" />
 

@@ -132,7 +132,7 @@ export async function paymentSession({ configId }: { configId: string }) {
     }
 
     const createdOrder = await inst.orders.create({
-      amount: order.amount * 100,
+      amount: order.amount ,
       currency: "INR",
       receipt: order.id,
       notes: {

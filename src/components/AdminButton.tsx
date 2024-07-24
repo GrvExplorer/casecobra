@@ -1,21 +1,29 @@
 "use client";
+
+const dynamic = "force-dynamic";
+
 import { useUser } from "@clerk/nextjs";
-import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 function AdminButton() {
   const { user } = useUser();
-  const router = useRouter()
+  console.log("🚀 ~ file: AdminButton.tsx:9 ~ AdminButton ~ user:", user);
 
-  if (user) {
-    const isAdmin =
-      user.emailAddresses[0].emailAddress !== process.env.ADMIN_EMAIL;
-    if (!isAdmin) return;
-    
-    return <Button onClick={() => router.push('/admin')} variant={"outline"}>Admin</Button>;
-  }
+  const router = useRouter();
 
-  return;
+  const isAdmin =
+    user?.emailAddresses[0].emailAddress === process.env.ADMIN_EMAIL;
+
+  if (!isAdmin) return;
+
+  return (
+    <>
+      <Button onClick={() => router.push("/admin")} variant={"outline"}>
+        Admin
+      </Button>
+    </>
+  );
 }
 
 export default AdminButton;
