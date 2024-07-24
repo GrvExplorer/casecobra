@@ -8,15 +8,15 @@ export const POST = async (req: Request, res: Response) => {
     });
 
     const options = await req.json();
-    console.log("🚀 ~ file: route.ts:11 ~ POST ~ options:", options)
+
 
 
     const order = await razorpay.orders.create(options);
-    console.log("🚀 ~ file: route.ts:14 ~ POST ~ order:", order)
+
 
 
     if (!order) {
-      console.log("🚀 ~ file: route.ts:14 ~ POST ~ order:", order)
+
       throw new Error("Something went wrong while creating the order");
 
     }
@@ -24,7 +24,6 @@ export const POST = async (req: Request, res: Response) => {
 
     return new Response(JSON.parse(JSON.stringify(order)), { status: 200 });
   } catch (error) {
-    console.log(error);
     return new Response(`Failed to create order ${error}`, { status: 500 });
   }
 };

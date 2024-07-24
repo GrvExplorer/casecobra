@@ -21,7 +21,6 @@ export async function getImageUrlById(id: string) {
       },
     };
   } catch (error) {
-    console.log(error);
     return {
       message: "some thing went wrong ! try again",
     };

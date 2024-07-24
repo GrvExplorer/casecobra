@@ -46,11 +46,6 @@ export const usePaymentSession = () => {
       paymentSession({ configId }),
     mutationKey: ["PAYMENT-SESSION"],
     onSuccess: ({ createdOrder }: any) => {
-      console.log(
-        "🚀 ~ file: queryandmutations.tsx:41 ~ usePaymentSession ~ createdOrder:",
-        createdOrder,
-      );
-
       if (createdOrder) {
         var options = {
           key: process.env.RAZORPAY_KEY_ID,
@@ -93,23 +88,16 @@ export const usePaymentSession = () => {
 
         var rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response: any) {
-          console.log(response.error.code);
-          console.log(response.error.description);
-          console.log(response.error.source);
-          console.log(response.error.step);
-          console.log(response.error.reason);
-          console.log(response.error.metadata.order_id);
-          console.log(response.error.metadata.payment_id);
+          toast({
+            title: "Something went wrong.",
+            description: "There was an error on our end. Please try again.",
+            variant: "destructive", 
+          });
         });
         rzp1.open();
       }
     },
     onError: (error) => {
-      console.log(
-        "🚀 ~ file: queryandmutations.tsx:93 ~ usePaymentSession ~ error:",
-        error,
-      );
-
       toast({
         title: "Something went wrong.",
         description: "There was an error on our end. Please try again.",

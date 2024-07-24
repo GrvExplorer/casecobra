@@ -54,8 +54,6 @@ export const POST = async (req: Request, res: NextApiResponse) => {
 
     const details = razorpay_order_id + "|" + razorpay_payment_id;
 
-    console.log("🚀 ~ file: route.ts:9 ~ POST ~ details:", details);
-
     const hmac = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
       .update(details.toString());
@@ -111,7 +109,6 @@ export const POST = async (req: Request, res: NextApiResponse) => {
       });
     }
   } catch (error) {
-    console.log(error);
     return new Response("Failed", {
       status: 500,
     });

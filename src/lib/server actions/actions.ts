@@ -59,7 +59,6 @@ export async function saveConfig({
   model,
   configId,
 }: SaveConfigArgs) {
-  console.log(configId);
   const updated = await db.configuration.update({
     where: { id: configId },
     data: { color, finish, material, model },
@@ -109,7 +108,6 @@ export async function paymentSession({ configId }: { configId: string }) {
           userId: user.id,
         },
       });
-      console.log("🚀 ~ file: actions.ts:111 ~ paymentSession ~ order:", order);
     }
 
     const inst = new Razorpay({
@@ -123,10 +121,6 @@ export async function paymentSession({ configId }: { configId: string }) {
         if (!orderOnRazorpay) {
           throw new Error("Something went wrong while fetching the order");
         }
-        console.log(
-          "🚀 ~ file: actions.ts:91 ~ paymentSession ~ orderOnRazorpay: order already exists",
-          orderOnRazorpay,
-        );
         return { createdOrder: orderOnRazorpay };
       }
     }
@@ -149,19 +143,12 @@ export async function paymentSession({ configId }: { configId: string }) {
         id: createdOrder.id,
       },
     });
-
-    console.log(
-      "🚀 ~ file: actions.ts:97 ~ paymentSession ~ createdOrder:",
-      createdOrder,
-    );
-
     if (!createdOrder) {
       throw new Error("Something went wrong while creating the order");
     }
 
     return { createdOrder };
   } catch (error) {
-    console.log("🚀 ~ file: actions.ts ~ paymentSession ~ error:", error);
   }
 }
 

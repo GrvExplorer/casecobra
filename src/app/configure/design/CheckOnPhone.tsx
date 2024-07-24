@@ -93,7 +93,7 @@ export default function CheckOnPhone({
 
       await startUpload([file], { configId: configId });
     } catch (error) {
-      console.log(error);
+
       toast({
         title: "Something went wrong",
         description:

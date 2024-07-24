@@ -11,7 +11,7 @@ export default async function Page({
     id: string;
   };
 }) {
-  console.log(searchParams.id);
+
 
   if (!searchParams.id) notFound();
 
@@ -19,7 +19,7 @@ export default async function Page({
     searchParams.id,
   );
 
-  console.log(message);
+
 
   return (
     <div className="mt-10">

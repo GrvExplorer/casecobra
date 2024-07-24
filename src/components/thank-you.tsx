@@ -8,7 +8,6 @@ import PhonePreview from "./phone-preview";
 
 function ThankYou({ orderId,  }: { orderId: string }) {
   const { isPending, data: status, isError } = useGetPaymentStatus(orderId);
-  console.log("🚀 ~ file: thank-you.tsx:11 ~ ThankYou ~ status:", status)
   
   if (status === undefined) {
     return (
