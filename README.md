@@ -1,9 +1,17 @@
-# Welcome! To 👋
+# Welcome! To 👋 Case Cobra Project
     
-  <p align="left"> <a href="" target="_blank" rel="noreferrer"> <img src="" alt="banner" /></a> </p>
+  <p align="left"> <a href="https://casecobra-pied.vercel.app/" target="_blank" rel="noreferrer"> <img src="./public/thumbnail.png" alt="banner" /></a> </p>
 
 # Technologies used 
  <p style="display: flex; gap: 10px;">
+
+- uploadThing
+- prisma
+- razorpay
+- resend
+- next
+- clerk
+
 
 
  </p>
@@ -20,13 +28,14 @@
   - Landing Page Complete 2:16:58
   
 
-# Acknowledgments
+## Acknowledgments
+[josh tried coding](https://youtu.be/SG82Aqcaaa0?si=MH6LA3rEtrguJEPd)
 
-# Feedback for me 
+## Feedback for me 
 
-# Useful Resources 
+## Useful Resources 
 
-# Course 
+## Course 
 
 ## For Developers
     ## The challenge
@@ -37,3 +46,8 @@
     ## Need Help from me 
 
 **Have fun  Coding 🚀**
+
+# License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+

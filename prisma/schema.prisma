@@ -63,15 +63,15 @@ model User {
 model Order {
   id                String           @id @default(cuid())
   configurationId   String
-  configuration     Configuration    @relation(fields: [configurationId], references: [id])
+  configuration     Configuration    @relation(fields: [configurationId], references: [id], onDelete: Cascade)
   userId            String
-  user              User             @relation(fields: [userId], references: [id])
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   amount            Float
   isPaid            Boolean          @default(false)
   status            OrderStatus      @default(awaiting_shipment)
   shippingAddressId String?
-  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
-  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade)
+  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id], onDelete: Cascade)
   billingAddressId  String?
 
   createdAt DateTime @default(now())
