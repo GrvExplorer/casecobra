@@ -36,5 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 /project 2 cobra-dev
+/project-3-digitalhippo
 /project-5-thread
+/project-6-portfolio
 /project-7-auth
