@@ -6,12 +6,28 @@ import { Loader2 } from "lucide-react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import PhonePreview from "./phone-preview";
 
-function ThankYou({ orderId,  }: { orderId: string }) {
-  const { isPending, data: status, isError } = useGetPaymentStatus(orderId);
+function ThankYou({ orderId }: { orderId: string | undefined }) {
+  if (orderId === undefined) {
+    return (
+      <div className="mt-24 flex h-[62vh] w-full justify-center">
+        <div className="flex flex-col items-center gap-2">
+          <Loader2 className="h-10 w-10 animate-spin text-zinc-500" />
+
+          <h3 className="text-xl font-semibold">Loading your order...</h3>
+
+          <p className="text-sm text-zinc-500">
+            Please wait while we verify your payment.
+          </p>
+        </div>
+      </div>
+    );
+  }
   
+  const { isPending, data: status, isError } = useGetPaymentStatus(orderId);
+
   if (status === undefined) {
     return (
-      <div className="mt-24 h-[62vh] flex w-full justify-center">
+      <div className="mt-24 flex h-[62vh] w-full justify-center">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-10 w-10 animate-spin text-zinc-500" />
 
@@ -27,7 +43,7 @@ function ThankYou({ orderId,  }: { orderId: string }) {
 
   if (status === false) {
     return (
-      <div className="mt-24 flex w-full justify-center h-[62vh] ">
+      <div className="mt-24 flex h-[62vh] w-full justify-center ">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-10 w-10 animate-spin text-zinc-500" />
 
@@ -42,8 +58,7 @@ function ThankYou({ orderId,  }: { orderId: string }) {
   }
 
   const { amount, configuration } = status;
-  const { color, finish, material, model, croppedImageUrl } = configuration
-  
+  const { color, finish, material, model, croppedImageUrl } = configuration;
 
   return (
     <MaxWidthWrapper className={""}>
@@ -78,12 +93,9 @@ function ThankYou({ orderId,  }: { orderId: string }) {
             </div>
           </div>
 
-          <div className='flex space-x-6 overflow-hidden mt-4 rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl'>
-          <PhonePreview
-            croppedImageUrl={croppedImageUrl!}
-            color={color!}
-          />
-        </div>
+          <div className="mt-4 flex space-x-6 overflow-hidden rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl">
+            <PhonePreview croppedImageUrl={croppedImageUrl!} color={color!} />
+          </div>
 
           <div>
             {/* TODO: Get the shipping address from user in checkout session */}

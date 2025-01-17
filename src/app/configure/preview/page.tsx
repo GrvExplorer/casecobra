@@ -9,9 +9,8 @@ export default async function Page({
 }) {
   const { id } = searchParams;
 
-  if (!id || typeof id !== "string") {
-    return notFound();
-  }
+  if (!id || typeof id !== "string") return;
+  
 
   const configuration = await db.configuration.findUnique({
     where: {
@@ -19,9 +18,8 @@ export default async function Page({
     },
   });
 
-  if (!configuration) {
-    return notFound();
-  }
+  if (!configuration) return;
+  
 
   return (
     <div>

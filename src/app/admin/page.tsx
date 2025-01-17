@@ -31,16 +31,16 @@ async function Admin() {
   const referer = headers().get("referer");
 
   // TODO: Check if the user is admin not working properly in production 
-  if (!current) {
-    return notFound()
-  }
+  // if (!current) {
+  //   return notFound()
+  // }
 
-  if (current.id !== process.env.ADMIN_ID) {
-    if (!referer) {
-      return redirect("/");
-    }
-    return redirect(referer);
-  }
+  // if (current.id !== process.env.ADMIN_ID) {
+  //   if (!referer) {
+  //     return redirect("/");
+  //   }
+  //   return redirect(referer);
+  // }
 
   // TODO: getting the order based on number of days like for 7d, 30d, 90d ( option to change it )
 

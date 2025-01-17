@@ -8,18 +8,14 @@ export default async function Page({
   searchParams,
 }: {
   searchParams: {
-    id: string;
+    id: string | undefined;
   };
 }) {
-
-
-  if (!searchParams.id) notFound();
+  if (!searchParams.id) return;
 
   const { message, imageUrl, proportion } = await getImageUrlById(
     searchParams.id,
   );
-
-
 
   return (
     <div className="mt-10">

@@ -9,7 +9,7 @@ export default async function Page({
   searchParams,
 }: {
   searchParams: {
-    orderId: string
+    orderId: string | undefined
   }
 }) {
 
