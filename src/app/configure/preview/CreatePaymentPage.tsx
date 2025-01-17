@@ -4,6 +4,8 @@ import LoginModal from "@/components/ui/LoginModal";
 import { usePaymentSession } from "@/lib/react query/mutations/queryandmutations";
 import { useUser } from "@clerk/nextjs";
 import { MoveRight } from "lucide-react";
+import Head from "next/head";
+import Script from "next/script";
 import { useState } from "react";
 
 export default function CreatePaymentPage({ configId }: { configId: string }) {

@@ -34,7 +34,7 @@ export default function RootLayout({
       <QueryProvider>
         <html lang="en">
           <head>
-            <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
+            
           </head>
           <body className={bricolage.className}>
             <Toaster />
